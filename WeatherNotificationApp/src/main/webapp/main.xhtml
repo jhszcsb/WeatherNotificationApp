@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<title>Main Page</title>
+		<link rel="stylesheet" href="bootstrap.css" />
+	</h:head>
+	<h:body>
+	
+		<h:form id="mainForm">
+
+			<h1>Create a subscription</h1>
+
+			<p:messages closable="true" />
+
+			Warn me via e-mail, when the temperature in
+			<p:inputText value="#{subscriptionMB.city}"
+						 required="true"
+						 requiredMessage="Please enter a city." >
+				<!-- TODO: add length validator -->
+			</p:inputText>
+			is above
+			<p:inputText value="#{subscriptionMB.temperature}"
+						 requiredMessage="Please enter a temperature."
+						 validatorMessage="Please add a temperature between -100 and 100 degrees (Celsius)"
+						 required="true">
+				<!-- TODO: add length validator -->
+				<f:validateLongRange minimum="-100" maximum="100" />
+			</p:inputText>
+			degrees (Celsius)
+			<br/>
+			My e-mail address:
+			<p:inputText value="#{subscriptionMB.email}"
+						 required="true"
+						 requiredMessage="Please enter your email address."
+						 validatorMessage="Invalid email address!">
+				<f:validateLength maximum="40" />
+				<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</p:inputText>
+
+			<h:commandButton value="Subscribe!"
+							 action="#{subscriptionMB.subscribe()}" />
+
+			<br/><br/>
+
+		</h:form>
+	
+	</h:body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Test Page</title>
+    <link rel="stylesheet" href="bootstrap.css" />
+</h:head>
+<h:body>
+
+    <h:form>
+
+        <h1>Test Services</h1>
+
+        <br/>
+
+        <h2>Test Scheduler</h2>
+
+        <h:commandButton value="Test Scheduler"
+                         action="#{subscriptionController.testSchedule()}" />
+
+        <br/>
+
+        <h2>Test Scheduler for All Subscriptions</h2>
+
+        <h:commandButton value="Test Scheduler for All Subscriptions"
+                         action="#{subscriptionMB.testScheduleMessages()}" />
+
+        <br/>
+
+        <h2>Test E-mail Service</h2>
+
+        <h:commandButton value="Test E-mail Service"
+                         action="#{subscriptionService.testSendMail()}" />
+
+        <br/>
+
+        <h2>Test Weather Service</h2>
+
+        The temperature in Budapest is: <h:outputText value="#{weatherRESTController.readWeather()}" /> degrees in Celsius.
+
+        <br/><br/><br/>
+
+        <p:commandLink value="Back to main page" action="#{subscriptionController.backToMainPage()}" />
+
+    </h:form>
+
+</h:body>
+</html>
