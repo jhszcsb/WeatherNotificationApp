@@ -12,7 +12,7 @@ public class SubscriptionEntity {
     private int id;
     private String email;
     private String city;
-    private int temperature;
+    private double temperature;
 
     @Id
     @Column(name="ID", unique = true, nullable = false)
@@ -44,11 +44,11 @@ public class SubscriptionEntity {
     }
 
     @Column(name="TEMPERATURE")
-    public int getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 }

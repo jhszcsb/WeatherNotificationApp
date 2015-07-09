@@ -9,9 +9,13 @@ import java.util.List;
  */
 public interface ISubscriptionDAO {
 
-    public void createSubscription(SubscriptionEntity subscription);
+    public void createSubscription(String email, String city, double temperature);
 
     public SubscriptionEntity findByEmail(String email);
 
     public List<SubscriptionEntity> findAll();
+
+    public boolean isDuplicateSubscription(String email, String city);
+
+    public void updateSubscription(String email, String city, double temperature);
 }

@@ -13,6 +13,9 @@
 
 	<task:annotation-driven />
 
+	<!--<context:annotation-config />-->
+	<!--<context:component-scan base-package="weathernotificationapp" />-->
+
 	<bean id="MailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />

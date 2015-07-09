@@ -27,7 +27,7 @@
         <h2>Test Scheduler for All Subscriptions</h2>
 
         <h:commandButton value="Test Scheduler for All Subscriptions"
-                         action="#{subscriptionMB.testScheduleMessages()}" />
+                         action="#{subscriptionMB.startSchedulerForMessages()}" />
 
         <br/>
 
@@ -40,7 +40,7 @@
 
         <h2>Test Weather Service</h2>
 
-        The temperature in Budapest is: <h:outputText value="#{weatherRESTController.readWeather()}" /> degrees in Celsius.
+        The temperature in Budapest is: <h:outputText value="#{weatherRESTController.readWeatherTest()}" /> degrees in Celsius.
 
         <br/><br/><br/>
 

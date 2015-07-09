@@ -1,10 +1,6 @@
 package weathernotificationapp.controller;
 
-import weathernotificationapp.service.ISubscriptionService;
-import weathernotificationapp.service.SubscriptionService;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -24,8 +20,6 @@ public class SubscriptionController {
     }
 
     public void testSchedule() {
-        System.out.println("Scheduler invoked!");
-
         final ScheduledExecutorService scheduler =
                 Executors.newScheduledThreadPool(1);
 

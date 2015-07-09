@@ -15,7 +15,7 @@
 
 			<h1>Create a subscription</h1>
 
-			<p:messages closable="true" />
+			<p:messages id="messages" closable="true" />
 
 			Warn me via e-mail, when the temperature in
 			<p:inputText value="#{subscriptionMB.city}"
@@ -47,6 +47,14 @@
 							 action="#{subscriptionMB.subscribe()}" />
 
 			<br/><br/>
+
+			<p:dialog id="confirmDialog" visible="#{subscriptionMB.dialogVisible}"
+					  widgetVar="confirmUpdateDialog" header="Confirm Update"
+					  modal="true" >
+				<h:outputText value="Click update if you wish to update your existing subscription for this city" />
+				<br/>
+				<p:commandButton value="Update" action="#{subscriptionMB.updateSubscription()}" update="confirmDialog messages" />
+			</p:dialog>
 
 		</h:form>
 	
