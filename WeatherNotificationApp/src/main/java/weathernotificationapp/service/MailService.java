@@ -11,10 +11,10 @@ import java.util.Properties;
 @Component
 public class MailService {
 
-    public static final String SENDER_USER_MAIL_ADDRESS = "weathernews@outlook.hu";
-    public static final String SENDER_PASSWORD = "Weather1234";
+    public static final String SENDER_USER_MAIL_ADDRESS = "";
+    public static final String SENDER_PASSWORD = "";
     public static final String MAIL_SUBJECT = "Weather Notification";
-    public static final String TEST_RECEIVER_MAIL_ADDRESS = "weathernotificationapp@gmail.com";
+    public static final String TEST_RECEIVER_MAIL_ADDRESS = "";
     public static final String TEST_CITY = "Test City";
     public static final double TEST_TEMPERATURE = 30;
 
