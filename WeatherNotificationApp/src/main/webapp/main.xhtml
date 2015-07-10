@@ -18,42 +18,42 @@
 			<p:messages id="messages" closable="true" />
 
 			Warn me via e-mail, when the temperature in
-			<p:inputText value="#{subscriptionMB.city}"
+			<p:inputText value="#{subscriptionBean.city}"
 						 required="true"
+						 validatorMessage="City name must not be longer than 40 characters!"
 						 requiredMessage="Please enter a city." >
-				<!-- TODO: add length validator -->
+				<f:validateLength maximum="40" />
 			</p:inputText>
 			is above
-			<p:inputText value="#{subscriptionMB.temperature}"
+			<p:inputText value="#{subscriptionBean.temperature}"
 						 requiredMessage="Please enter a temperature."
 						 validatorMessage="Please add a temperature between -100 and 100 degrees (Celsius)"
 						 required="true">
-				<!-- TODO: add length validator -->
 				<f:validateLongRange minimum="-100" maximum="100" />
 			</p:inputText>
 			degrees (Celsius)
 			<br/>
 			My e-mail address:
-			<p:inputText value="#{subscriptionMB.email}"
+			<p:inputText value="#{subscriptionBean.email}"
 						 required="true"
 						 requiredMessage="Please enter your email address."
-						 validatorMessage="Invalid email address!">
+						 validatorMessage="Invalid email address! (Wrong format or length: the maximum length is 40 characters)">
 				<f:validateLength maximum="40" />
 				<f:validateRegex
 						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 			</p:inputText>
 
 			<h:commandButton value="Subscribe!"
-							 action="#{subscriptionMB.subscribe()}" />
+							 action="#{subscriptionBean.subscribe()}" />
 
 			<br/><br/>
 
-			<p:dialog id="confirmDialog" visible="#{subscriptionMB.dialogVisible}"
+			<p:dialog id="confirmDialog" visible="#{subscriptionBean.dialogVisible}"
 					  widgetVar="confirmUpdateDialog" header="Confirm Update"
 					  modal="true" >
 				<h:outputText value="Click update if you wish to update your existing subscription for this city" />
 				<br/>
-				<p:commandButton value="Update" action="#{subscriptionMB.updateSubscription()}" update="confirmDialog messages" />
+				<p:commandButton value="Update" action="#{subscriptionBean.updateSubscription()}" update="confirmDialog messages" />
 			</p:dialog>
 
 		</h:form>

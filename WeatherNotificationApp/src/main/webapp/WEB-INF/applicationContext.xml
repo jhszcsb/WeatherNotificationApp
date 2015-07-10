@@ -9,21 +9,8 @@
 		        http://www.springframework.org/schema/context 
 		        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<!--<context:annotation-config />-->
-	<!--<context:component-scan base-package="weathernotificationapp" />-->
-
-	<bean id="SubscriptionEntity" class="weathernotificationapp.entity.SubscriptionEntity" />
-
-	<bean id="SubscriptionService" class="weathernotificationapp.service.SubscriptionService">
-		<property name="subscriptionDAO" ref="SubscriptionDAO" />
-		<property name="mailService" ref="MailService" />
-	</bean>
-
-	<bean id="MailService" class="weathernotificationapp.service.MailService" />
-
-	<bean id="SubscriptionDAO" class="weathernotificationapp.dao.SubscriptionDAO">
-		<property name="sessionFactory" ref="SessionFactory" />
-	</bean>
+	<context:annotation-config />
+	<context:component-scan base-package="weathernotificationapp" />
 
 	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">

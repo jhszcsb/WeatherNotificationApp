@@ -1,12 +1,16 @@
 package weathernotificationapp.dao;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import weathernotificationapp.entity.SubscriptionEntity;
 
 import java.util.List;
 
+@Service    // todo change to repository
 public class SubscriptionDAO {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public SessionFactory getSessionFactory() {

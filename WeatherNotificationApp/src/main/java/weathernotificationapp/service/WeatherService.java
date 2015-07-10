@@ -2,12 +2,10 @@ package weathernotificationapp.service;
 
 import org.json.*;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.faces.bean.ManagedBean;
-
-@ManagedBean    // managedbean because test page uses it
+@Service
 public class WeatherService {
 
     public static final String WEATHER_API_BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
@@ -45,7 +43,7 @@ public class WeatherService {
 
     private JSONObject performAPIRequest(String city) {
         String url = WEATHER_API_BASE_URL + city;
-        RestTemplate restTemplate = new RestTemplate(); // todo dependency injection
+        RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
         String result = restTemplate.getForObject(url, String.class, "SpringSource");
         JSONObject json = new JSONObject(result);

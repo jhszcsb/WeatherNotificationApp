@@ -1,9 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Test Page</title>
@@ -20,21 +18,21 @@
         <h2>Test Scheduler</h2>
 
         <h:commandButton value="Test Scheduler"
-                         action="#{subscriptionMB.testSchedule()}" />
+                         action="#{subscriptionBean.testSchedule()}" />
 
         <br/>
 
         <h2>Start Scheduler for Mail Sending</h2>
 
         <h:commandButton value="Start Scheduler for Mail Sending"
-                         action="#{subscriptionMB.startSchedulerForMessages()}" />
+                         action="#{subscriptionBean.startSchedulerForMessages()}" />
 
         <br/>
 
         <h2>Start Scheduler for Periodic Weather Check</h2>
 
         <h:commandButton value="Start Scheduler for Periodic Weather Check"
-                         action="#{subscriptionMB.startSchedulerForPeriodicWeatherCheck()}" />
+                         action="#{subscriptionBean.startSchedulerForPeriodicWeatherCheck()}" />
 
         <br/>
 
@@ -51,7 +49,7 @@
 
         <br/><br/><br/>
 
-        <p:commandLink value="Back to main page" action="#{subscriptionMB.backToMainPage()}" />
+        <p:commandLink value="Back to main page" action="#{subscriptionBean.backToMainPage()}" />
 
     </h:form>
 

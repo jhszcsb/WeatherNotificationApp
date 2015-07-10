@@ -1,13 +1,13 @@
 package weathernotificationapp.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import weathernotificationapp.service.MailService;
 import weathernotificationapp.entity.SubscriptionEntity;
 import weathernotificationapp.service.SubscriptionService;
 import weathernotificationapp.service.WeatherService;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.util.List;
@@ -16,21 +16,23 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-@ManagedBean(name="subscriptionMB")
 @RequestScoped
-public class SubscriptionBean {
+@Service    // todo change to controller
+public class SubscriptionBean { // todo remove scheduler things, etc.
 
     public static final String ALREADY_SUBSCRIBED = "Already subscribed to this city!";
     public static final String NO_WEATHER_INFORMATION_AVAILABLE = "There is no weather information for this city!";
     public static final String SUBSCRIBED = "Subscribed!";
     public static final String SUBSCRIPTION_UPDATED = "Subscription updated!";
 
-    @ManagedProperty(value="#{SubscriptionService}")
+    @Autowired
     SubscriptionService subscriptionService;
 
-    MailService mailService = new MailService();
+    @Autowired
+    MailService mailService;// = new MailService();
 
-    WeatherService weatherService = new WeatherService();
+    @Autowired
+    WeatherService weatherService;// = new WeatherService();
 
     private String email;
     private String city;

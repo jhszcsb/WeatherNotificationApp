@@ -2,9 +2,6 @@ package weathernotificationapp.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by Csaba on 2015.07.06..
- */
 @Entity(name="subscription")
 @Table(name="SUBSCRIPTION")
 public class SubscriptionEntity {

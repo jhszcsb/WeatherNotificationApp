@@ -1,6 +1,8 @@
 package weathernotificationapp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import weathernotificationapp.dao.SubscriptionDAO;
 import weathernotificationapp.entity.SubscriptionEntity;
@@ -11,13 +13,14 @@ import java.util.*;
 
 
 @Transactional(readOnly = true) // todo delete this?
-@ManagedBean(name = "subscriptionService")
-@Component
+@Service
 public class SubscriptionService {
 
+    @Autowired
     SubscriptionDAO subscriptionDAO;
 
-    MailService mailService = new MailService();
+    @Autowired
+    MailService mailService;
 
     @Transactional(readOnly = false)
     public void createSubscription(String email, String city, double temperature) {
