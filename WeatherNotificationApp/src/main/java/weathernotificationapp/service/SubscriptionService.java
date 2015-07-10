@@ -1,9 +1,9 @@
 package weathernotificationapp.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import weathernotificationapp.dao.ISubscriptionDAO;
-import weathernotificationapp.mail.MailService;
-import weathernotificationapp.model.SubscriptionEntity;
+import weathernotificationapp.dao.SubscriptionDAO;
+import weathernotificationapp.entity.SubscriptionEntity;
 
 import javax.faces.bean.ManagedBean;
 
@@ -12,17 +12,18 @@ import java.util.*;
 
 @Transactional(readOnly = true) // todo delete this?
 @ManagedBean(name = "subscriptionService")
-public class SubscriptionService implements ISubscriptionService {
+@Component
+public class SubscriptionService {
 
-    ISubscriptionDAO subscriptionDAO;
+    SubscriptionDAO subscriptionDAO;
+
+    MailService mailService = new MailService();
 
     @Transactional(readOnly = false)
-    @Override
     public void createSubscription(String email, String city, double temperature) {
         getSubscriptionDAO().createSubscription(email, city, temperature);
     }
 
-    @Override
     public boolean isAlreadySubscribed(String email, String city) {
         if(getSubscriptionDAO().isDuplicateSubscription(email, city)) {
             return false;
@@ -30,28 +31,43 @@ public class SubscriptionService implements ISubscriptionService {
         else return true;
     }
 
-    @Override
     public List<SubscriptionEntity> findAll() {
         return subscriptionDAO.findAll();
     }
 
-    public ISubscriptionDAO getSubscriptionDAO() {
+    public SubscriptionDAO getSubscriptionDAO() {
         return subscriptionDAO;
     }
 
-    public void setSubscriptionDAO(ISubscriptionDAO subscriptionDAO) {
+    public void setSubscriptionDAO(SubscriptionDAO subscriptionDAO) {
         this.subscriptionDAO = subscriptionDAO;
     }
 
+    public MailService getMailService() {
+        return mailService;
+    }
+
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
+
     public String testSendMail() {
-        MailService mailService = new MailService();    // todo dependency injection
         mailService.testMail();
         return "mailSent";
     }
 
-    @Override
     @Transactional(readOnly = false)
     public void updateSubscription(String email, String city, double temperature) {
         getSubscriptionDAO().updateSubscription(email, city, temperature);
+    }
+
+    @Transactional(readOnly = false)
+    public void setNotification(SubscriptionEntity s) {
+        getSubscriptionDAO().setNotificationForSubscription(s);
+    }
+
+    @Transactional(readOnly = false)
+    public void clearNotification(SubscriptionEntity s) {
+        getSubscriptionDAO().clearNotificationForSubscription(s);
     }
 }

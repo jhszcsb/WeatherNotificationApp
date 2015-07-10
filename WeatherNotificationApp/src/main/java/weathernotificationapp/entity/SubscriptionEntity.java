@@ -1,4 +1,4 @@
-package weathernotificationapp.model;
+package weathernotificationapp.entity;
 
 import javax.persistence.*;
 
@@ -13,6 +13,7 @@ public class SubscriptionEntity {
     private String email;
     private String city;
     private double temperature;
+    private int notification;
 
     @Id
     @Column(name="ID", unique = true, nullable = false)
@@ -50,5 +51,14 @@ public class SubscriptionEntity {
 
     public void setTemperature(double temperature) {
         this.temperature = temperature;
+    }
+
+    @Column(name="NOTIFICATION")
+    public int getNotification() {
+        return notification;
+    }
+
+    public void setNotification(int notification) {
+        this.notification = notification;
     }
 }

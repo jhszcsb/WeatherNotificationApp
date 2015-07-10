@@ -1,9 +1,9 @@
 package weathernotificationapp.beans;
 
-import weathernotificationapp.mail.MailService;
-import weathernotificationapp.model.SubscriptionEntity;
-import weathernotificationapp.service.ISubscriptionService;
-import weathernotificationapp.weather.WeatherRESTController;
+import weathernotificationapp.service.MailService;
+import weathernotificationapp.entity.SubscriptionEntity;
+import weathernotificationapp.service.SubscriptionService;
+import weathernotificationapp.service.WeatherService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +26,11 @@ public class SubscriptionBean {
     public static final String SUBSCRIPTION_UPDATED = "Subscription updated!";
 
     @ManagedProperty(value="#{SubscriptionService}")
-    ISubscriptionService subscriptionService;
+    SubscriptionService subscriptionService;
+
+    MailService mailService = new MailService();
+
+    WeatherService weatherService = new WeatherService();
 
     private String email;
     private String city;
@@ -48,8 +52,7 @@ public class SubscriptionBean {
     }
 
     private boolean isRealCity() {
-        WeatherRESTController weatherRESTController = new WeatherRESTController();  // todo dependency injection
-        return weatherRESTController.isRealCity(getCity());
+        return weatherService.isRealCity(getCity());
     }
 
     public void updateSubscription() {
@@ -62,7 +65,7 @@ public class SubscriptionBean {
         return subscriptionService.isAlreadySubscribed(getEmail(), getCity());
     }
 
-    public void startSchedulerForMessages() {
+    public void startSchedulerForPeriodicWeatherCheck() {
         final ScheduledExecutorService scheduler =
                 Executors.newScheduledThreadPool(1);
 
@@ -71,13 +74,42 @@ public class SubscriptionBean {
                 List<SubscriptionEntity> allSubscriptions = subscriptionService.findAll();
                 for(SubscriptionEntity s : allSubscriptions) {
                     if(isTemperatureAboveSubscribed(s)) {
+                        setNotification(s);
+                        System.out.println("setting notification for " + s.getCity() + s.getEmail());
+                    }
+                }
+            }
+        };
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 1, TimeUnit.HOURS);
+    }
+
+    private void setNotification(SubscriptionEntity s) {
+        subscriptionService.setNotification(s);
+    }
+
+    public void startSchedulerForMessages() {
+        final ScheduledExecutorService scheduler =
+                Executors.newScheduledThreadPool(1);
+
+        final Runnable beeper = new Runnable() {
+            public void run() {
+                List<SubscriptionEntity> allSubscriptions = subscriptionService.findAll();
+                for(SubscriptionEntity s : allSubscriptions) {
+                    if(isNotificationNecessary(s)) {
                         sendMailNotification(s);
+                        clearNotification(s);
+                        System.out.println("sending mail for " + s.getCity() + s.getEmail());
                     }
                 }
             }
         };
         // TODO: set the beeper to one tick per day
-        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 10, 60, TimeUnit.SECONDS);
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 1, TimeUnit.DAYS);
+    }
+
+    private boolean isNotificationNecessary(SubscriptionEntity s) {
+        if(s.getNotification() == 1) return true;
+        else return false;
     }
 
     private boolean isTemperatureAboveSubscribed(SubscriptionEntity s) {
@@ -92,13 +124,15 @@ public class SubscriptionBean {
     }
 
     private double getCurrentTemperatureForCity(String city) {
-        WeatherRESTController weatherRESTController = new WeatherRESTController();  // todo dependency injection
-        return weatherRESTController.getCurrentTemperatureForCity(city);
+        return weatherService.getCurrentTemperatureForCity(city);
     }
 
     private void sendMailNotification(SubscriptionEntity s) {
-        MailService mailService = new MailService();    // todo dependency injection
         mailService.sendMailNotification(s);
+    }
+
+    private void clearNotification(SubscriptionEntity s) {
+        subscriptionService.clearNotification(s);
     }
 
     private void addMessage(String msg) {
@@ -130,11 +164,11 @@ public class SubscriptionBean {
         this.temperature = temperature;
     }
 
-    public ISubscriptionService getSubscriptionService() {
+    public SubscriptionService getSubscriptionService() {
         return subscriptionService;
     }
 
-    public void setSubscriptionService(ISubscriptionService subscriptionService) {
+    public void setSubscriptionService(SubscriptionService subscriptionService) {
         this.subscriptionService = subscriptionService;
     }
 
@@ -144,5 +178,28 @@ public class SubscriptionBean {
 
     public void setDialogVisible(boolean dialogVisible) {
         this.dialogVisible = dialogVisible;
+    }
+
+    public String backToMainPage() {
+        return "main";
+    }
+
+    public String navigateToTestServices() {
+        return "testServices";
+    }
+
+    public void testSchedule() {
+        final ScheduledExecutorService scheduler =
+                Executors.newScheduledThreadPool(1);
+
+        final Runnable beeper = new Runnable() {
+            public void run() { System.out.println("beep"); }
+        };
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 3, 3, TimeUnit.SECONDS);
+        /*scheduler.schedule(new Runnable() {
+            public void run() {
+                beeperHandle.cancel(true);
+            }
+        }, 3 , TimeUnit.SECONDS);*/
     }
 }

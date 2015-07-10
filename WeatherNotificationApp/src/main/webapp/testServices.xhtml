@@ -20,14 +20,21 @@
         <h2>Test Scheduler</h2>
 
         <h:commandButton value="Test Scheduler"
-                         action="#{subscriptionController.testSchedule()}" />
+                         action="#{subscriptionMB.testSchedule()}" />
 
         <br/>
 
-        <h2>Test Scheduler for All Subscriptions</h2>
+        <h2>Start Scheduler for Mail Sending</h2>
 
-        <h:commandButton value="Test Scheduler for All Subscriptions"
+        <h:commandButton value="Start Scheduler for Mail Sending"
                          action="#{subscriptionMB.startSchedulerForMessages()}" />
+
+        <br/>
+
+        <h2>Start Scheduler for Periodic Weather Check</h2>
+
+        <h:commandButton value="Start Scheduler for Periodic Weather Check"
+                         action="#{subscriptionMB.startSchedulerForPeriodicWeatherCheck()}" />
 
         <br/>
 
@@ -40,11 +47,11 @@
 
         <h2>Test Weather Service</h2>
 
-        The temperature in Budapest is: <h:outputText value="#{weatherRESTController.readWeatherTest()}" /> degrees in Celsius.
+        The temperature in Budapest is: <h:outputText value="#{weatherService.readWeatherTest()}" /> degrees in Celsius.
 
         <br/><br/><br/>
 
-        <p:commandLink value="Back to main page" action="#{subscriptionController.backToMainPage()}" />
+        <p:commandLink value="Back to main page" action="#{subscriptionMB.backToMainPage()}" />
 
     </h:form>
 
