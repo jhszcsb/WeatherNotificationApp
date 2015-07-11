@@ -10,8 +10,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 @RequestScoped
-@Controller    // todo rename class to SubscriptionController
-public class SubscriptionBean { // todo remove scheduler things, etc.
+@Controller
+public class SubscriptionBean {
 
     public static final String ALREADY_SUBSCRIBED = "Already subscribed to this city!";
     public static final String NO_WEATHER_INFORMATION_AVAILABLE = "There is no weather information for this city!";

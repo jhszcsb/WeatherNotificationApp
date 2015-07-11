@@ -6,7 +6,7 @@ import weathernotificationapp.service.MailService;
 import weathernotificationapp.service.SchedulerService;
 import weathernotificationapp.service.WeatherService;
 
-@Controller    // todo rename class to ManagementController
+@Controller
 public class ManagementBean {
 
     @Autowired

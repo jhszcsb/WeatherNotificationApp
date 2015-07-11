@@ -90,7 +90,6 @@ public class SchedulerService {
                 }
             }
         };
-        // TODO: set the beeper to one tick per day
         final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 1, TimeUnit.DAYS);
     }
 
