@@ -4,52 +4,38 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Test Page</title>
+    <title>Management Page</title>
     <link rel="stylesheet" href="bootstrap.css" />
 </h:head>
 <h:body>
 
     <h:form>
 
-        <h1>Test Services</h1>
-
+        <h1>Manage and Test Services</h1>
         <br/>
-
         <h2>Test Scheduler</h2>
-
         <h:commandButton value="Test Scheduler"
-                         action="#{subscriptionBean.testSchedule()}" />
-
+                         action="#{managementBean.testSchedule()}" />
+        <br/>
+        <h2>Test E-mail Service</h2>
+        <h:commandButton value="Test E-mail Service"
+                         action="#{managementBean.testSendMail()}" />
+        <br/>
+        <h2>Test Weather Service</h2>
+        The temperature in Budapest is: <h:outputText value="#{managementBean.readWeatherTest()}" /> degrees in Celsius.
         <br/>
 
         <h2>Start Scheduler for Mail Sending</h2>
 
         <h:commandButton value="Start Scheduler for Mail Sending"
-                         action="#{subscriptionBean.startSchedulerForMessages()}" />
-
+                         action="#{managementBean.startSchedulerForMessages()}" />
         <br/>
-
         <h2>Start Scheduler for Periodic Weather Check</h2>
-
         <h:commandButton value="Start Scheduler for Periodic Weather Check"
-                         action="#{subscriptionBean.startSchedulerForPeriodicWeatherCheck()}" />
-
-        <br/>
-
-        <h2>Test E-mail Service</h2>
-
-        <h:commandButton value="Test E-mail Service"
-                         action="#{subscriptionService.testSendMail()}" />
-
-        <br/>
-
-        <h2>Test Weather Service</h2>
-
-        The temperature in Budapest is: <h:outputText value="#{weatherService.readWeatherTest()}" /> degrees in Celsius.
-
+                         action="#{managementBean.startSchedulerForPeriodicWeatherCheck()}" />
         <br/><br/><br/>
 
-        <p:commandLink value="Back to main page" action="#{subscriptionBean.backToMainPage()}" />
+        <p:commandLink value="Back to main page" action="#{managementBean.backToMainPage()}" />
 
     </h:form>
 

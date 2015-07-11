@@ -1,13 +1,10 @@
 package weathernotificationapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import weathernotificationapp.dao.SubscriptionDAO;
 import weathernotificationapp.entity.SubscriptionEntity;
-
-import javax.faces.bean.ManagedBean;
 
 import java.util.*;
 
@@ -52,11 +49,6 @@ public class SubscriptionService {
 
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
-    }
-
-    public String testSendMail() {
-        mailService.testMail();
-        return "mailSent";
     }
 
     @Transactional(readOnly = false)
