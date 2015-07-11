@@ -105,8 +105,4 @@ public class SchedulerService {
     private void clearNotification(SubscriptionEntity s) {
         subscriptionService.clearNotification(s);
     }
-
-    public String backToMainPage() {
-        return "main";
-    }
 }

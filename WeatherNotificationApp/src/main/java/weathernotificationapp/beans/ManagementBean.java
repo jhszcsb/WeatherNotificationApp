@@ -38,4 +38,7 @@ public class ManagementBean {
         return weatherService.readWeatherTest();
     }
 
+    public String backToMainPage() {
+        return "main";
+    }
 }
