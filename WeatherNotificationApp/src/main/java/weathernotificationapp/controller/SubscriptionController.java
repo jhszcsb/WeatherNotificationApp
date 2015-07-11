@@ -1,6 +1,7 @@
 package weathernotificationapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import weathernotificationapp.service.SubscriptionService;
 import weathernotificationapp.service.WeatherService;
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 
 @RequestScoped
 @Controller
+@Scope("request")
 public class SubscriptionController {
 
     public static final String ALREADY_SUBSCRIBED = "Already subscribed to this city!";
