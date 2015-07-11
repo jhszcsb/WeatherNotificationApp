@@ -13,6 +13,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SchedulerService {
 
+    public static final int TEST_TIME_PERIOD = 3;
+    public static final int CHECK_WEATHER_TIME_PERIOD = 1;
+    public static final int SEND_MAIL_TIME_PERIOD = 1;
+    public static final int INITIAL_OFFSET_TIME = 1;
+
     @Autowired
     SubscriptionService subscriptionService;
 
@@ -25,16 +30,10 @@ public class SchedulerService {
     public void testSchedule() {
         final ScheduledExecutorService scheduler =
                 Executors.newScheduledThreadPool(1);
-
         final Runnable beeper = new Runnable() {
             public void run() { System.out.println("beep"); }
         };
-        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 3, 3, TimeUnit.SECONDS);
-        /*scheduler.schedule(new Runnable() {
-            public void run() {
-                beeperHandle.cancel(true);
-            }
-        }, 3 , TimeUnit.SECONDS);*/
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, TEST_TIME_PERIOD, TEST_TIME_PERIOD, TimeUnit.SECONDS);
     }
 
     public void startWeatherCheck() {
@@ -52,7 +51,7 @@ public class SchedulerService {
                 }
             }
         };
-        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 1, TimeUnit.HOURS);
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, INITIAL_OFFSET_TIME, CHECK_WEATHER_TIME_PERIOD, TimeUnit.HOURS);
     }
 
     private boolean isTemperatureAboveSubscribed(SubscriptionEntity s) {
@@ -90,7 +89,7 @@ public class SchedulerService {
                 }
             }
         };
-        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 1, TimeUnit.DAYS);
+        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, INITIAL_OFFSET_TIME, SEND_MAIL_TIME_PERIOD, TimeUnit.DAYS);
     }
 
     private boolean isNotificationNecessary(SubscriptionEntity s) {

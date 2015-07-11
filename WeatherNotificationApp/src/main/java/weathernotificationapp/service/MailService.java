@@ -40,12 +40,7 @@ public class MailService {
             message.setFrom(new InternetAddress(SENDER_USER_MAIL_ADDRESS));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s.getEmail()));
             message.setSubject(MAIL_SUBJECT);
-            message.setText(
-                    "Dear Subscriber,"
-                            + "\n\n This is a notification about weather."
-                            + "\n\n The temperature in " + s.getCity()
-                            + " is above " + s.getTemperature()
-                            + " degrees (Celsius).");
+            message.setText(prepareMailText(s.getCity(), s.getTemperature()));
 
             Transport.send(message);
         } catch (MessagingException e) {
@@ -59,5 +54,13 @@ public class MailService {
         testEntity.setCity(TEST_CITY);
         testEntity.setTemperature(TEST_TEMPERATURE);
         sendMailNotification(testEntity);
+    }
+
+    private String prepareMailText(String city, double temperature) {
+        return "Dear Subscriber,"
+                + "\n\n This is a notification about weather."
+                + "\n\n The temperature in " + city
+                + " is above " + temperature
+                + " degrees (Celsius).";
     }
 }
