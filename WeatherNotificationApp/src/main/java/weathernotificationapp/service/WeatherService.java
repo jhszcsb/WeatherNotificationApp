@@ -45,7 +45,7 @@ public class WeatherService {
         String url = WEATHER_API_BASE_URL + city;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        String result = restTemplate.getForObject(url, String.class, "SpringSource");
+        String result = restTemplate.getForObject(url, String.class);
         JSONObject json = new JSONObject(result);
         return json;
     }

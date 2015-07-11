@@ -15,27 +15,27 @@
         <br/>
         <h2>Test Scheduler</h2>
         <h:commandButton value="Test Scheduler"
-                         action="#{managementBean.testSchedule()}" />
+                         action="#{managementController.testSchedule()}" />
         <br/>
         <h2>Test E-mail Service</h2>
         <h:commandButton value="Test E-mail Service"
-                         action="#{managementBean.testSendMail()}" />
+                         action="#{managementController.testSendMail()}" />
         <br/>
         <h2>Test Weather Service</h2>
-        The temperature in Budapest is: <h:outputText value="#{managementBean.readWeatherTest()}" /> degrees in Celsius.
+        The temperature in Budapest is: <h:outputText value="#{managementController.readWeatherTest()}" /> degrees in Celsius.
         <br/>
 
         <h2>Start Scheduler for Mail Sending</h2>
 
         <h:commandButton value="Start Scheduler for Mail Sending"
-                         action="#{managementBean.startSchedulerForMessages()}" />
+                         action="#{managementController.startSchedulerForMessages()}" />
         <br/>
         <h2>Start Scheduler for Periodic Weather Check</h2>
         <h:commandButton value="Start Scheduler for Periodic Weather Check"
-                         action="#{managementBean.startSchedulerForPeriodicWeatherCheck()}" />
+                         action="#{managementController.startSchedulerForPeriodicWeatherCheck()}" />
         <br/><br/><br/>
 
-        <p:commandLink value="Back to main page" action="#{managementBean.backToMainPage()}" />
+        <p:commandLink value="Back to main page" action="#{managementController.backToMainPage()}" />
 
     </h:form>
 

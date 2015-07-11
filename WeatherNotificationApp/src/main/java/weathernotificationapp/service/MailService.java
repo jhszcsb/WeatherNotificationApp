@@ -12,7 +12,7 @@ import java.util.Properties;
 public class MailService {
 
     public static final String SENDER_USER_MAIL_ADDRESS = "weathernews@outlook.hu";
-    public static final String SENDER_PASSWORD = "Weather1234";
+    public static final String SENDER_PASSWORD = "";
     public static final String MAIL_SUBJECT = "Weather Notification";
     public static final String TEST_RECEIVER_MAIL_ADDRESS = "jhszcsb@gmail.com";
     public static final String TEST_CITY = "Test City";

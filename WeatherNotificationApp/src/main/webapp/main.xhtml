@@ -7,54 +7,65 @@
 	
 	<h:head>
 		<title>Main Page</title>
+		<link rel="stylesheet" href="styles.css" />
 		<link rel="stylesheet" href="bootstrap.css" />
 	</h:head>
 	<h:body>
 	
 		<h:form id="mainForm">
 
-			<h1>Create a subscription</h1>
+			<div id="container" class="panel panel-default">
 
-			<p:messages id="messages" closable="true" />
-
-			Warn me via e-mail, when the temperature in
-			<p:inputText value="#{subscriptionBean.city}"
-						 required="true"
-						 validatorMessage="City name must not be longer than 40 characters!"
-						 requiredMessage="Please enter a city." >
-				<f:validateLength maximum="40" />
-			</p:inputText>
-			is above
-			<p:inputText value="#{subscriptionBean.temperature}"
-						 requiredMessage="Please enter a temperature."
-						 validatorMessage="Please add a temperature between -100 and 100 degrees (Celsius)"
-						 required="true">
-				<f:validateLongRange minimum="-100" maximum="100" />
-			</p:inputText>
-			degrees (Celsius)
-			<br/>
-			My e-mail address:
-			<p:inputText value="#{subscriptionBean.email}"
-						 required="true"
-						 requiredMessage="Please enter your email address."
-						 validatorMessage="Invalid email address! (Wrong format or length: the maximum length is 40 characters)">
-				<f:validateLength maximum="40" />
-				<f:validateRegex
-						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-			</p:inputText>
-
-			<h:commandButton value="Subscribe!"
-							 action="#{subscriptionBean.subscribe()}" />
-
-			<br/><br/>
-
-			<p:dialog id="confirmDialog" visible="#{subscriptionBean.dialogVisible}"
-					  widgetVar="confirmUpdateDialog" header="Confirm Update"
-					  modal="true" >
-				<h:outputText value="Click update if you wish to update your existing subscription for this city" />
+				<h1>Create a subscription</h1>
 				<br/>
-				<p:commandButton value="Update" action="#{subscriptionBean.updateSubscription()}" update="confirmDialog messages" />
-			</p:dialog>
+
+				<p:messages id="messages" closable="true" />
+
+				Warn me via e-mail, when the temperature in
+				<p:inputText id="city" value="#{subscriptionController.city}"
+							 required="true" styleClass="form-control"
+							 validatorMessage="City name must not be longer than 40 characters!"
+							 requiredMessage="Please enter a city." >
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:watermark for="city" value="City Name" />
+				is above
+				<p:inputText id="temperature" value="#{subscriptionController.temperature}"
+							 requiredMessage="Please enter a temperature."
+							 validatorMessage="Please add a temperature between -100 and 100 degrees (Celsius)"
+							 required="true" styleClass="form-control">
+					<f:validateLongRange minimum="-100" maximum="100" />
+				</p:inputText>
+				<p:watermark for="temperature" value="Temperature" />
+				degrees (Celsius)
+				<br/><br/>
+				My e-mail address:
+				<p:inputText id="email" value="#{subscriptionController.email}"
+							 required="true" styleClass="form-control"
+							 requiredMessage="Please enter your email address."
+							 validatorMessage="Invalid email address! (Wrong format or length: the maximum length is 40 characters)">
+					<f:validateLength maximum="40" />
+					<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:watermark for="email" value="E-mail Address" />
+
+				<h:commandButton id="subscribe" value="Subscribe!"
+								 action="#{subscriptionController.subscribe()}"
+								 class="btn btn-default navbar-btn"/>
+
+				<br/><br/>
+
+				<p:dialog id="confirmDialog" visible="#{subscriptionController.dialogVisible}"
+						  widgetVar="confirmUpdateDialog" header="Confirm Update"
+						  modal="true" >
+					<h:outputText value="Click update if you wish to update your existing subscription for this city" />
+					<br/>
+					<p:commandButton value="Update" action="#{subscriptionController.updateSubscription()}" update="confirmDialog messages"
+									 styleClass="btn btn-default navbar-btn" />
+				</p:dialog>
+
+			</div>
 
 		</h:form>
 	

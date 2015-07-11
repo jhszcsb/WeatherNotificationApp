@@ -9,7 +9,7 @@ import weathernotificationapp.entity.SubscriptionEntity;
 import java.util.*;
 
 
-@Transactional(readOnly = true) // todo delete this?
+@Transactional(readOnly = true)
 @Service
 public class SubscriptionService {
 
