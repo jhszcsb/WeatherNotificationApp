@@ -16,7 +16,7 @@ public class SchedulerService {
     public static final int TEST_TIME_PERIOD = 3;
     public static final int CHECK_WEATHER_TIME_PERIOD = 1;
     public static final int SEND_MAIL_TIME_PERIOD = 1;
-    public static final int INITIAL_OFFSET_TIME = 1;
+    public static final int INITIAL_OFFSET_TIME = 0;
 
     @Autowired
     SubscriptionService subscriptionService;
@@ -30,6 +30,7 @@ public class SchedulerService {
     public void testSchedule() {
         final ScheduledExecutorService scheduler =
                 Executors.newScheduledThreadPool(1);
+
         final Runnable beeper = new Runnable() {
             public void run() { System.out.println("beep"); }
         };

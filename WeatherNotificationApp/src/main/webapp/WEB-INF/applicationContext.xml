@@ -23,7 +23,7 @@
 		<property name="minPoolSize" value="5" />
 	</bean>
 
-	<!-- OPENSHIFT configuration -->
+	<!-- OPENSHIFT configuration: -->
 	<!--
 	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 				 destroy-method="close">
