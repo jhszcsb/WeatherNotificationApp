@@ -13,7 +13,7 @@ public class SubscriptionDAO {
     public static final String CREATE_SUBSCRIPTION_QUERY = "INSERT INTO `SUBSCRIPTION` (`EMAIL`, `CITY`, `TEMPERATURE`, `NOTIFICATION`) VALUES (:email, :city, :temperature, 0);";
     public static final String FIND_ALL_QUERY = "from subscription s where s.email = :email";
     public static final String IS_DUPLICATE_QUERY = "from subscription s where s.email = :email and s.city = :city";
-    public static final String UPDATE_SUBSCRIPTION_QUERY = "UPDATE `SUBSCRIPTION` SET TEMPERATURE = :temperature WHERE EMAIL = :email AND CITY = :city";
+    public static final String UPDATE_SUBSCRIPTION_QUERY = "UPDATE `SUBSCRIPTION` SET TEMPERATURE = :temperature, NOTIFICATION = 0 WHERE EMAIL = :email AND CITY = :city";
     public static final String SET_NOTIFICATION_QUERY = "UPDATE `SUBSCRIPTION` SET NOTIFICATION = 1 WHERE EMAIL = :email AND CITY = :city";
     public static final String CLEAR_NOTIFICATIONS_QUERY = "UPDATE `SUBSCRIPTION` SET NOTIFICATION = 0 WHERE EMAIL = :email AND CITY = :city";
 
